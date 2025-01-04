@@ -45,8 +45,8 @@ end)
 
 AddEventHandler("OnPostRoundEnd", function(event)
     local TPlayers = FindPlayersByTarget("@t", true)
-    for _, player in ipairs(TPlayers) do
-        player:SwitchTeam(3)
+    for i=1,#TPlayers do
+        TPlayers[i]:SwitchTeam(3)
     end
     if not MAX_TR then
         print("Error: MAX_TR not defined")
