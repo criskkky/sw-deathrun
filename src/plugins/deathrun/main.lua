@@ -27,24 +27,19 @@ end)
 AddEventHandler("OnClientCommand", function(event, playerid, command) -- Player Management
     local player = GetPlayer(playerid)
     if not player then return end
-
 	local TPlayers = FindPlayersByTarget("@t", true)
-
 	local jointeam_ct = "^jointeam 3%s?%d*$" -- CT
 	local jointeam_t = "^jointeam 2%s?%d*$" -- T
-
 	-- Block CT when there's no players on T
 	if string.match(command, jointeam_ct) and #TPlayers == 0 then
 		player:SendMsg(MessageType.Center, string.format("%s %s", PrefixHTML, FetchTranslation("deathrun.teamlimit")))
 		event:SetReturn(false)
 	end
-
 	-- Block T when there's more than X players on T
 	if string.match(command, jointeam_t) and #TPlayers >= MAX_TR then
 		player:SendMsg(MessageType.Center, string.format("%s %s", PrefixHTML, FetchTranslation("deathrun.teamlimit")))
 		event:SetReturn(false)
 	end
-
     return EventResult.Continue
 end)
 
@@ -54,7 +49,7 @@ AddEventHandler("OnPostRoundEnd", function(event)
         player:SwitchTeam(3)
     end
     if not MAX_TR then
-        print("Error: MAX_TR no defined")
+        print("Error: MAX_TR not defined")
         return EventResult.Continue
     end
     local CTPlayers = FindPlayersByTarget("@ct", true)
@@ -74,12 +69,10 @@ end)
 AddEventHandler("OnClientCommand", function(event, playerid, command) -- Block Commands
     local player = GetPlayer(playerid)
     if not player then return end
-
     if string.find(command, "^buy") then
         player:SendMsg(MessageType.Chat, string.format("%s %s", PrefixChat, FetchTranslation("deathrun.blocked_cmd")))
         event:SetReturn(false)
     end
-
     return EventResult.Continue
 end)
 
