@@ -1,0 +1,17 @@
+{
+	"teamlimit": {
+		"en": "The team you were trying to join is limited.",
+		"es": "El equipo al que intentabas unirte está limitado.",
+		"ro": "Echipa la care încercați să vă alăturați este limitată."
+	},
+	"blocked_cmd": {
+		"en": "The command you were trying to use is blocked.",
+		"es": "El comando que intentabas usar está bloqueado.",
+		"ro": "Comanda pe care încercați să o folosiți este blocată."
+	},
+	"randomtr": {
+		"en": "Selecting random player to be the Death.",
+		"es": "Seleccionando un jugador al azar para ser la Muerte.",
+		"ro": "Se selectează un jucător aleatoriu pentru a fi Moartea."
+	}
+}
