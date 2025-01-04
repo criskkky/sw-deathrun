@@ -11,5 +11,5 @@ function GetPluginName()
 end
 
 function GetPluginWebsite()
-	return "https://github.com/criskkky/swiftly_deathrun"
+	return "https://github.com/criskkky/sw-deathrun"
 end
