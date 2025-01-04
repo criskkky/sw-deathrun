@@ -4,44 +4,6 @@ PrefixChat = "{red}[Deathrun]{default}"
 MAX_TIME = 20
 MAX_TR = 2
 
-function SetSpeed(player, speed)
-	-- Get the player pawn
-	local playerPawn = player:CCSPlayerPawn()
-	if not playerPawn:IsValid() then return end  -- Ensure the pawn is valid
-
-	-- Set the velocity modifier (speed) for the player
-	playerPawn.VelocityModifier = speed
-end
-
-function PluginConfig()
-	server:Execute("mp_roundtime " .. MAX_TIME)
-	server:Execute("mp_roundtime_defuse " .. MAX_TIME)
-	server:Execute("mp_roundtime_hostage " .. MAX_TIME)
-	-- Punishment settings
-	server:Execute("mp_autokick 0")
-	server:Execute("mp_friendlyfire 0")
-	server:Execute("mp_suicide_penalty 0")
-	server:Execute("mp_autokick 0")
-	-- Rounds Setup
-	server:Execute("mp_maxrounds 30")
-	server:Execute("mp_freezetime 2")
-	server:Execute("mp_limitteams 0")
-	-- server:Execute("mp_halftime 0") -- DISABLED HERE DUE SCOREBOARD VISUAL BUG
-	server:Execute("mp_tkpunish 0")
-	server:Execute("bot_knives_only 1")
-	-- Talk
-	server:Execute("sv_alltalk 1")
-	server:Execute("sv_full_alltalk 1")
-	server:Execute("sv_talk_enemy_dead 1")
-	server:Execute("sv_talk_enemy_living 1")
-	-- Others
-	server:Execute("bot_quota_mode normal")
-	server:Execute("sv_enablebunnyhopping 1")
-	-- Required
-	server:Execute("mp_warmup_end")
-	server:Execute("mp_restartgame 2")
-end
-
 AddEventHandler("OnMapLoad", function(event, map)
 	PluginConfig()
     return EventResult.Continue
@@ -92,7 +54,7 @@ AddEventHandler("OnPostRoundEnd", function(event)
         player:SwitchTeam(3)
     end
     if not MAX_TR then
-        print("Error: MAX_TR no definido")
+        print("Error: MAX_TR no defined")
         return EventResult.Continue
     end
     local CTPlayers = FindPlayersByTarget("@ct", true)
@@ -127,7 +89,7 @@ AddEventHandler("OnPlayerSpawn", function(event)
 	if not player then return end
 	if player:IsFirstSpawn() then return end
 	NextTick(function()
-	if not player:CBaseEntity():IsValid() then return print("Player is not valid") end
+	if not player:CBaseEntity():IsValid() then return end
 		local team = player:CBaseEntity().TeamNum
 		if team == Team.T then
 			SetSpeed(player, 3)
